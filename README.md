@@ -14,8 +14,21 @@ Users will be able to add/edit/delete options.
 ###Searching for happy hour in Nashville
 By inputing a day of the week (e.g. "Wednesday") and a Nashville zip code, the user will receive a bar and/or restaurant suggestion that has a drink and/or food special for that day of the week. Output will also include the suggested bar's/restaurant's address, phone number, website, offered special(including price) and happy-hour hours.
 
+Usage Example:
+    ./happy_nash
+    Search for a Nashville happy hour by day of week and zip code:
+    Ex: User Input ["Wednesday"] ["37201"]
+
 ###Adding a new bar/restaurant with happy hour
 In order to provide users with a robust number of results, users can add a new happy-hour location to the database, so long as they can provide, at minimum, the name and address of the location, the day(s) of the week that location offers happy hour, and the drink/food specials offered on that day, including price.
+
+Usage Example:
+    ./happy_nash manage
+    1. Add a happy hour location
+    2. Edit a happy hour location
+    3. Delete a happy hour location
+    4. List all happy hour locations
+    5. Exit management menu
 
 ###Editing an existing bar/restaurant
 Editing will allow the users to keep drink/food specials and contact details up to date and accurate as bars and restaurants change their offerings and/or contact information.

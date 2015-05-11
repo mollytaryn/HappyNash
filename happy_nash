@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require 'highline/import'
+
+if ARGV.length < 1
+  print "[Help] Run as: ./happy_nash manage"
+elsif ARGV.length == 1
+  if ARGV[0] != 'manage'
+    print "[Help] Run as: ./happy_nash manage"
+  else
+    choose do |menu|
+      menu.prompt = ""
+
+      menu.choice('Add a happy hour location') { say("")}
+      menu.choice('Edit a happy hour location') { say("")}
+      menu.choice('Delete a happy hour location') { say("")}
+      menu.choice('List all happy hour locations') { say("")}
+      menu.choice('Exit management menu') { say("You have successfully exited the management menu.")}
+    end
+  end
+end

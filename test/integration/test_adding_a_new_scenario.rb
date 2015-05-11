@@ -28,12 +28,10 @@ class AddingANewScenarioTest < Minitest::Test
     IO.popen('./happy_nash manage', 'r+') do |pipe|
       expected_output = <<EOS
 1. Add a happy hour location
-2. Edit a happy hour location
-3. Delete a happy hour location
-4. List all happy hour locations
-5. Exit management menu
+2. List all happy hour locations
+3. Exit management menu
 EOS
-      pipe.puts "5"
+      pipe.puts "3"
       expected_output << "You have successfully exited the management menu.\n"
       pipe.close_write
       shell_output = pipe.read

@@ -10,6 +10,7 @@ Users will be able to add/edit/delete options.
     -Adding a new happy hour bar / restaurant
     -Editing a happy hour bar / restaurant
     -Deleting a happy hour bar / restaurant
+    -Viewing happy hour bars by day of week and / or zipcode
 
 ###Searching for happy hour in Nashville by weekday and zip code
 By inputing a day of the week (e.g. "Wednesday") and a Nashville zip code, the user will receive a bar and/or restaurant suggestion that has a drink and/or food special for that day of the week. Output will also include the suggested bar's/restaurant's address, phone number, website, offered special(including price) and happy-hour hours.
@@ -17,8 +18,11 @@ By inputing a day of the week (e.g. "Wednesday") and a Nashville zip code, the u
 Usage Example:
 ```
 > ./happy_nash  
-Search for a Nashville happy hour by day of week and/or zip code:  
-> Wednesday 37217  
+Do you want to search for a Nashville happy hour by day of week? If so, write out the day of week below:
+> Wednesday
+Do you want to narrow your search for a Nashville happy hour by zip code? If so, give a Nashville zip code below:
+>37217  
+
 Wilhagan's  
 314 Wilhagan Rd  
 37217  
@@ -27,8 +31,6 @@ https://plus.google.com/116455568721224326104/about?gl=us&hl=en
 Wednesday 5:00 - 7:00  
 $2 PBRs and $4 Margaritas  
 
-1. Start over
->1
 ```
 ###Adding a new bar/restaurant with happy hour
 In order to provide users with a robust number of results, users can add a new happy-hour location to the database, so long as they can provide, at minimum, the name and address of the location, the day(s) of the week that location offers happy hour, and the drink/food specials offered on that day, including price.
@@ -47,7 +49,7 @@ What is the street address of this location?
 > 314 Wilhagan Rd  
 What is the 5-digit zip code of this location?  
 >37217  
-What is the 10-digit phone number of this location? Use the following format: xxx-xxx-xxxx  
+What is the 10-digit phone number of this location? Use the following format: xxx-xxx-xxxx
 >615-360-9175  
 Does this location have a website? If so, please provide it here:  
 > https://plus.google.com/116455568721224326104/about?gl=us&hl=en  
@@ -69,7 +71,7 @@ Does this location have a Sunday happy hour (y/n)?
 > n  
 Describe the Monday Happy Hour:  
 > $2 PBRs and $4 Margaritas  
-Thank you for adding Wilhagens to the HappyNash database!  
+Thank you for adding a new location to the HappyNash database!  
 What would you like to do?  
 1. Add a happy hour location  
 2. List all happy hour locations
@@ -208,8 +210,11 @@ Users may input day of week only to receive a complete list of drink / food spec
 Usage Example:
 ```
 > ./happy_nash  
-Search for a Nashville happy hour by day of week and/or zip code:  
-> Wednesday  
+Do you want to search for a Nashville happy hour by day of week? If so, write out the day of week below:
+> Wednesday
+Do you want to narrow your search for a Nashville happy hour by zip code? If so, give a Nashville zip code below:
+>
+
 Wilhagan's  
 314 Wilhagan Rd  
 37217  
@@ -226,8 +231,6 @@ $2 PBRs and $4 Margaritas
 Wednesday 5:00 - 7:00  
 $2 Miller Light and $4 Well Drinks  
 
-1. Start over  
->1  
 ```
 
 ###Viewing all happy hours in specific zip code

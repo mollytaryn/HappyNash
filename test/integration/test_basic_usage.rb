@@ -1,6 +1,6 @@
 require_relative '../test_helper.rb'
 
-class AddingANewScenarioTest < Minitest::Test
+class TestBasicUsage < Minitest::Test
 
   def test_gives_correct_argument
     shell_output = ""
@@ -38,6 +38,4 @@ EOS
     end
     assert_equal expected_output, shell_output
   end
-
-
 end

@@ -7,15 +7,19 @@ menu_prompt = <<EOS
 3. Exit management menu
 EOS
 
-if ARGV.length < 1
+def print_error_message
   print "[Help] Run as: ./happy_nash manage"
+end
+
+if ARGV.length < 1
+    print_error_message
 elsif ARGV.length == 1
   if ARGV[0] != 'manage'
-    print "[Help] Run as: ./happy_nash manage"
+    print_error_message
   else
     choose do |menu|
       menu.prompt = ""
-      menu.choice('Add a happy hour location') { say("") }
+      menu.choice('Add a happy hour location') { say("What is the name of the location you want to add?\n") }
       menu.choice('List all happy hour locations') { say("No locations found. Add a location.\n#{ menu_prompt}") }
       menu.choice('Exit management menu') { say("You have successfully exited the management menu.") }
     end

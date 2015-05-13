@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 require 'highline/import'
+Dir["./app/**/*.rb"].each { |f| require f }
+Dir["./lib/*.rb"].each { |f| require f }
 
 menu_prompt = <<EOS
 1. Add a happy hour location
@@ -7,21 +9,15 @@ menu_prompt = <<EOS
 3. Exit management menu
 EOS
 
-def print_error_message
-  print "[Help] Run as: ./happy_nash manage"
-end
+if ARGV.size == 1 and ARGV[0] == "manage"
+  choose do |menu|
+    menu.prompt = ""
 
-if ARGV.length < 1
-    print_error_message
-elsif ARGV.length == 1
-  if ARGV[0] != 'manage'
-    print_error_message
-  else
-    choose do |menu|
-      menu.prompt = ""
-      menu.choice('Add a happy hour location') { say("What is the name of the location you want to add?\n") }
-      menu.choice('List all happy hour locations') { say("No locations found. Add a location.\n#{ menu_prompt}") }
-      menu.choice('Exit management menu') { say("You have successfully exited the management menu.") }
-    end
+    locations_controller = LocationsController.new
+    menu.choice('Add a happy hour location') { say("What is the name of the location you want to add?\n") }
+    menu.choice('List all happy hour locations') { locations_controller.index }
+    menu.choice('Exit management menu') { say("You have successfully exited the management menu.\n") }
   end
+else
+  print "[Help] Run as: ./happy_nash manage"
 end

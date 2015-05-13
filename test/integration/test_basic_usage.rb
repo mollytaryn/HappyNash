@@ -2,7 +2,7 @@ require_relative '../test_helper.rb'
 
 class TestBasicUsage < Minitest::Test
 
-  def test_gives_correct_argument
+  def test_minimum_arguments_required
     shell_output = ""
     expected_output = ""
     IO.popen('./happy_nash') do |pipe|
@@ -12,10 +12,20 @@ class TestBasicUsage < Minitest::Test
     assert_equal expected_output, shell_output
   end
 
-  def test_manage_argument_not_given
+  def test_manage_wrong_argument_given
     shell_output = ""
     expected_output = ""
     IO.popen('./happy_nash blah') do |pipe|
+      expected_output = "[Help] Run as: ./happy_nash manage"
+      shell_output = pipe.read
+    end
+    assert_equal expected_output, shell_output
+  end
+
+  def test_manage_multiple_arguments_given
+    shell_output = ""
+    expected_output = ""
+    IO.popen('./happy_nash manage blah') do |pipe|
       expected_output = "[Help] Run as: ./happy_nash manage"
       shell_output = pipe.read
     end
@@ -26,11 +36,7 @@ class TestBasicUsage < Minitest::Test
     shell_output = ""
     expected_output = ""
     IO.popen('./happy_nash manage', 'r+') do |pipe|
-      expected_output = <<EOS
-1. Add a happy hour location
-2. List all happy hour locations
-3. Exit management menu
-EOS
+      expected_output << main_menu
       pipe.puts "3"
       expected_output << "You have successfully exited the management menu.\n"
       pipe.close_write

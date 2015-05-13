@@ -6,11 +6,7 @@ class AddingANewLocationTest < Minitest::Test
     shell_output = ""
     expected_output = ""
     IO.popen('./happy_nash manage', 'r+') do |pipe|
-      expected_output = <<EOS
-1. Add a happy hour location
-2. List all happy hour locations
-3. Exit management menu
-EOS
+      expected_output << main_menu
       pipe.puts "1"
       expected_output << "What is the name of the location you want to add?\n"
       pipe.puts "Wilhagan's"

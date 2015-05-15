@@ -10,13 +10,25 @@ menu_prompt = <<EOS
 EOS
 
 if ARGV.size == 1 and ARGV[0] == "manage"
-  choose do |menu|
-    menu.prompt = ""
+  loop do
+    choose do |menu|
+      menu.prompt = ""
 
-    locations_controller = LocationsController.new
-    menu.choice('Add a happy hour location') { say("What is the name of the location you want to add?\n") }
-    menu.choice('List all happy hour locations') { locations_controller.index }
-    menu.choice('Exit management menu') { say("You have successfully exited the management menu.\n") }
+      locations_controller = LocationsController.new
+      menu.choice('Add a happy hour location') do
+        user_input = ask("What is the name of the location you want to add?\n")
+        response = locations_controller.add(user_input)
+        say(response) unless response.nil?
+      end
+      menu.choice('List all happy hour locations') do
+        say(locations_controller.index)
+        exit
+      end
+      menu.choice('Exit management menu') do
+        say("You have successfully exited the management menu.\n")
+        exit
+      end
+    end
   end
 else
   print "[Help] Run as: ./happy_nash manage"

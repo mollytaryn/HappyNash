@@ -2,19 +2,45 @@ require_relative '../test_helper.rb'
 
 class AddingANewLocationTest < Minitest::Test
 
-  def test_manage_argument_given
+  def test_happy_path_adding_a_location
     shell_output = ""
-    expected_output = ""
+    expected_output = main_menu
+    test_location = "Green House Bar"
     IO.popen('./happy_nash manage', 'r+') do |pipe|
-      expected_output << main_menu
       pipe.puts "1"
       expected_output << "What is the name of the location you want to add?\n"
-      pipe.puts "Wilhagan's"
-      expected_output << "What is the street address of this location?\n"
-      pipe.puts "314 Wilhagan Rd"
-      expected_output <<"Thank you for adding a new location to the HappyNash database!\n"
+      pipe.puts test_location
+      expected_output << "\"#{test_location}\" has been added!\n"
+      expected_output << main_menu
+      pipe.puts "2"
+      expected_output << "1. #{test_location}\n"
       shell_output = pipe.read
+      pipe.close_write
+      pipe.close_read
     end
     assert_equal expected_output, shell_output
   end
+
+  def test_sad_path_adding_a_location
+    skip
+    shell_output = ""
+    happy_location = "Green House Bar"
+    expected_output = main_menu
+    IO.popen('./happy_nash manage', 'r+') do |pipe|
+      pipe.puts "1"
+      expected_output << "What is the name of the location you want to add?\n"
+      pipe.puts ""
+      expected_output << "\"\" is not a valid location name.\n"
+      expected_output << "What is the name of the location you want to add?\n"
+      pipe.puts happy_location
+      expected_output << "\"#{happy_location}\" has been added\n"
+      pipe.puts "2"
+      expected_output << "1. #{happy_location}"
+      shell_output = pipe.read
+      pipe.close_write
+      pipe.close_read
+    end
+    assert_equal expected_output, shell_output
+  end
+
 end

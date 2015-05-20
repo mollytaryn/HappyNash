@@ -92,10 +92,12 @@ What would you like to do?
 1. Wilhagan's  
 2. 3 Crow Bar  
 3. The Green House Bar  
+4. Exit
 > 1  
 What would you like to do?  
 1. Edit this location  
 2. Delete this location  
+3. Exit
 1 >  
 Wilhagan's  
 314 Wilhagan Rd  
@@ -114,9 +116,9 @@ Select the information you would like to edit:
 7. Specials  
 8. Exit Edit Menu  
 > 5  
-Please enter the updated URL below:  
+Please enter the updated information below:  
 > www.wilhagans.com  
-You edit has been saved. Select the information you would like to edit:  
+Your edit has been saved. Select the information you would like to edit:  
 1. Name  
 2. Street address  
 3. Zip code  

@@ -5,13 +5,31 @@ class LocationsController
   def index
     if Location.count > 0
       locations = Location.all
-      locations_string = ""
-      locations.each_with_index do |location, index|
-        locations_string << "#{index + 1}. #{location.name}\n"
+      choose do |menu|
+        menu.prompt = ""
+        locations.each do |location|
+          menu.choice(location.name) { action_menu(location) }
+        end
+        menu.choice("Exit")
       end
-      locations_string
     else
-      "No locations found. Add a location.\n"
+      say("No locations found. Add a location.\n")
+    end
+  end
+
+  def action_menu(location)
+    say("What would you like to do?")
+    choose do |menu|
+      menu.prompt = ""
+      menu.choice("Edit this location") do
+        edit(location)
+      end
+      menu.choice("Delete this location") do
+        destroy(location)
+      end
+      menu.choice("Exit") do
+        exit
+      end
     end
   end
 
@@ -22,6 +40,19 @@ class LocationsController
       "\"#{name}\" has been added!\n"
     else
       location.errors
+    end
+  end
+
+  def edit(location)
+    loop do
+      user_input = ask("Please enter the updated information below:")
+      location.name = user_input.strip
+      if location.save
+        say("Your edit has been saved.")
+        return
+      else
+        say(location.errors)
+      end
     end
   end
 end

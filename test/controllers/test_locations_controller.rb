@@ -6,6 +6,7 @@ describe LocationsController do
     let(:controller) {LocationsController.new}
 
     it "should say no locations found when empty" do
+      skip
       actual_output = controller.index
       expected_output = "No locations found. Add a location.\n"
       assert_equal expected_output, actual_output

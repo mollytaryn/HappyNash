@@ -5,7 +5,7 @@ class AddingANewLocationTest < Minitest::Test
   def test_happy_path_adding_a_location
     shell_output = ""
     expected_output = main_menu
-    test_location = "Green House Bar"
+    test_location = "House Bar"
     IO.popen('./happy_nash manage', 'r+') do |pipe|
       pipe.puts "1"
       expected_output << "What is the name of the location you want to add?\n"
@@ -14,6 +14,8 @@ class AddingANewLocationTest < Minitest::Test
       expected_output << main_menu
       pipe.puts "2"
       expected_output << "1. #{test_location}\n"
+      expected_output << "2. Exit\n"
+      expected_output << exit_from(pipe)
       shell_output = pipe.read
       pipe.close_write
       pipe.close_read
@@ -23,7 +25,7 @@ class AddingANewLocationTest < Minitest::Test
 
   def test_sad_path_adding_a_location
     shell_output = ""
-    happy_location = "Green House Bar"
+    happy_location = "House Bar"
     expected_output = main_menu
     IO.popen('./happy_nash manage', 'r+') do |pipe|
       pipe.puts "1"
@@ -36,6 +38,8 @@ class AddingANewLocationTest < Minitest::Test
       expected_output << main_menu
       pipe.puts "2"
       expected_output << "1. #{happy_location}\n"
+      expected_output << "2. Exit\n"
+      expected_output << exit_from(pipe)
       shell_output = pipe.read
       pipe.close_write
       pipe.close_read

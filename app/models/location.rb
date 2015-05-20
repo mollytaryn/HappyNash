@@ -29,6 +29,15 @@ class Location
     end
   end
 
+  def self.find_by_name(name)
+    row = Database.execute("select * from locations where name LIKE ?", name).first
+    if row.nil?
+      nil
+    else
+      populate_from_database(row)
+    end
+  end
+
   def valid?
     if name.nil? or name.empty? or /^\d+$/.match(name)
       @errors = "\"#{name}\" is not a valid location name."
@@ -41,8 +50,13 @@ class Location
 
   def save
     return false unless valid?
-    Database.execute("INSERT INTO locations (name) VALUES (?)", name)
-    @id = Database.execute("SELECT last_insert_rowid()")[0]['last_insert_rowid()']
+    if @id.nil?
+      Database.execute("INSERT INTO locations (name) VALUES (?)", name)
+      @id = Database.execute("SELECT last_insert_rowid()")[0]['last_insert_rowid()']
+    else
+      Database.execute("UPDATE locations SET name=? WHERE id=?", name, id)
+      true
+    end
   end
 
   private

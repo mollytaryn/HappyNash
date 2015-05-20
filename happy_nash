@@ -26,8 +26,7 @@ if ARGV.size == 1 and ARGV[0] == "manage"
         end
       end
       menu.choice('List all happy hour locations') do
-        say(locations_controller.index)
-        exit
+        locations_controller.index
       end
       menu.choice('Exit management menu') do
         say("You have successfully exited the management menu.\n")

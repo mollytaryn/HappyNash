@@ -22,7 +22,6 @@ class AddingANewLocationTest < Minitest::Test
   end
 
   def test_sad_path_adding_a_location
-    skip
     shell_output = ""
     happy_location = "Green House Bar"
     expected_output = main_menu
@@ -33,9 +32,10 @@ class AddingANewLocationTest < Minitest::Test
       expected_output << "\"\" is not a valid location name.\n"
       expected_output << "What is the name of the location you want to add?\n"
       pipe.puts happy_location
-      expected_output << "\"#{happy_location}\" has been added\n"
+      expected_output << "\"#{happy_location}\" has been added!\n"
+      expected_output << main_menu
       pipe.puts "2"
-      expected_output << "1. #{happy_location}"
+      expected_output << "1. #{happy_location}\n"
       shell_output = pipe.read
       pipe.close_write
       pipe.close_read

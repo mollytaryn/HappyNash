@@ -24,5 +24,4 @@ class LocationsController
       location.errors
     end
   end
-
 end

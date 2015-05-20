@@ -6,16 +6,27 @@ class Location
     self.name = name
   end
 
+  def ==(other)
+    other.is_a?(Location) && other.id == self.id
+  end
+
   def self.all
-    Database.execute("select name from locations order by name ASC").map do |row|
-      location = Location.new
-      location.name = row[0]
-      location
+    Database.execute("select * from locations order by name ASC").map do |row|
+      populate_from_database(row)
     end
   end
 
   def self.count
     Database.execute("select count(id) from locations")[0][0]
+  end
+
+  def self.find(id)
+    row = Database.execute("select * from locations where id = ?", id).first
+    if row.nil?
+      nil
+    else
+      populate_from_database(row)
+    end
   end
 
   def valid?
@@ -32,5 +43,14 @@ class Location
     return false unless valid?
     Database.execute("INSERT INTO locations (name) VALUES (?)", name)
     @id = Database.execute("SELECT last_insert_rowid()")[0]['last_insert_rowid()']
+  end
+
+  private
+
+  def self.populate_from_database(row)
+    location = Location.new
+    location.name = row['name']
+    location.instance_variable_set(:@id, row['id'])
+    location
   end
 end

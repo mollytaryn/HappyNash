@@ -55,4 +55,11 @@ class LocationsController
       end
     end
   end
+
+  def destroy(location)
+    Location.destroy(location.id)
+    say("#{location.name} has been deleted.")
+    return
+  end
+
 end

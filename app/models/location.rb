@@ -38,6 +38,11 @@ class Location
     end
   end
 
+  def self.destroy(id)
+    Database.execute("DELETE FROM locations WHERE id=?", id)
+    @id = nil
+  end
+
   def valid?
     if name.nil? or name.empty? or /^\d+$/.match(name)
       @errors = "\"#{name}\" is not a valid location name."

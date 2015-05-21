@@ -4,9 +4,9 @@ class Database
 
   def self.load_structure
     Database.execute <<-SQL
-    CREATE TABLE IF NOT EXISTS locations (
+    CREATE TABLE IF NOT EXISTS adages (
       id integer PRIMARY KEY AUTOINCREMENT,
-      name varchar(160) NOT NULL
+      content varchar(600) NOT NULL
     );
     SQL
   end
@@ -18,7 +18,7 @@ class Database
 
   def self.initialize_database
     environment = ENV["TEST"] ? "test" : "production"
-    database = "db/happy_nash_#{environment}.sqlite"
+    database = "db/wise_old_dog_#{environment}.sqlite"
     @@db = SQLite3::Database.new(database)
     @@db.results_as_hash = true
   end

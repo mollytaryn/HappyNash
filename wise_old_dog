@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+require 'highline/import'
+Dir["./app/**/*.rb"].each { |f| require f }
+Dir["./lib/*.rb"].each { |f| require f }
+
+menu_prompt = <<EOS
+1. Add an adage
+2. List all adages
+3. Exit management menu
+EOS
+
+if ARGV.empty?
+  user_input = ask("I may be an old dog, but I am wise beyond my years. Ask me anything. I am ready to impart my wisdom.\n")
+  AdagesController.new().advice
+elsif ARGV.size == 1 and ARGV[0] == "manage"
+  loop do
+    choose do |menu|
+      menu.prompt = ""
+
+      adages_controller = AdagesController.new
+      menu.choice('Add an adage') do
+        loop do
+          user_input = ask("If you are an old, wise dog, add your adage below:\n")
+          response = adages_controller.add(user_input)
+          say(response) unless response.nil?
+          if /has\sbeen\sadded/.match(response)
+            break
+          end
+        end
+      end
+      menu.choice('List all adages') do
+        adages_controller.index
+      end
+      menu.choice('Exit management menu') do
+        say("You have successfully exited the management menu.\n")
+        exit
+      end
+    end
+  end
+else
+  print "[Help] Run as: ./wise_old_dog manage"
+end

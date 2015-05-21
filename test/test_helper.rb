@@ -13,13 +13,13 @@ require "minitest/autorun"
 class Minitest::Test
   def setup
     Database.load_structure
-    Database.execute("DELETE FROM locations;")
+    Database.execute("DELETE FROM adages;")
   end
 end
 
 
-def create_location(name)
-  Database.execute("INSERT INTO locations (name) VALUES (?)", name)
+def create_adage(content)
+  Database.execute("INSERT INTO adages (content) VALUES (?)", content)
 end
 
 def exit_from(pipe)
@@ -30,16 +30,16 @@ end
 
 def main_menu
 <<EOS
-1. Add a happy hour location
-2. List all happy hour locations
+1. Add an adage
+2. List all adages
 3. Exit management menu
 EOS
 end
 
 def action_menu
 <<EOS
-1. Edit this location
-2. Delete this location
+1. Edit this adage
+2. Delete this adage
 3. Exit
 EOS
 end

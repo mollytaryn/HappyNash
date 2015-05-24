@@ -39,12 +39,11 @@ class AdagesController
   end
 
   def add(content)
-    content_cleaned = content.strip
-    adage = Adage.new(content_cleaned)
+    adage = Adage.new(content.strip)
     if adage.save
       "\"#{content}\" has been added!\n"
     else
-      adage.errors
+      adage.errors.full_messages.join
     end
   end
 
@@ -56,7 +55,7 @@ class AdagesController
         say("Your edit has been saved.")
         return
       else
-        say(adage.errors)
+        say(adage.errors.full_messages.join)
       end
     end
   end

@@ -31,7 +31,7 @@ class AddingANewAdageTest < Minitest::Test
       pipe.puts "1"
       expected_output << "If you are an old, wise dog, add your adage below:\n"
       pipe.puts ""
-      expected_output << "\"\" is not a real adage.\n"
+      expected_output << "Content can't be blank.\n"
       expected_output << "If you are an old, wise dog, add your adage below:\n"
       pipe.puts happy_adage
       expected_output << "\"#{happy_adage}\" has been added!\n"

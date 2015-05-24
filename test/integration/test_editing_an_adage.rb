@@ -52,11 +52,11 @@ class EditingANewAdageTest < Minitest::Test
   end
 
   def test_sad_path_editing_an_adage
-  shell_output = ""
-  expected_output = main_menu
-  test_adage = "Give a dog a bone."
-  adage = Adage.new(test_adage)
-  adage.save
+    shell_output = ""
+    expected_output = main_menu
+    test_adage = "Give a dog a bone."
+    adage = Adage.new(test_adage)
+    adage.save
     IO.popen('./wise_old_dog manage', 'r+') do |pipe|
       pipe.puts "2"
       expected_output << "1. #{test_adage}\n"
@@ -66,7 +66,7 @@ class EditingANewAdageTest < Minitest::Test
       pipe.puts "1"
       expected_output << "Please enter the updated adage below:\n"
       pipe.puts ""
-      expected_output << "\"\"  is not a real adage.\n"
+      expected_output << "Content can't be blank.\n"
       expected_output << "Please enter the updated adage below:\n"
       pipe.puts "Give a dog two bones."
       expected_output << "Your edit has been saved.\n"

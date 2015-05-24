@@ -1,0 +1,11 @@
+production:
+  adapter: sqlite3
+  database: db/wise_old_dog_production.sqlite
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: db/wise_old_dog_test.sqlite
+  pool: 5
+  timeout: 5000

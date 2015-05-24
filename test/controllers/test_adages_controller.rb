@@ -16,15 +16,15 @@ describe AdagesController do
   describe ".add" do
     let(:controller) {AdagesController.new}
 
-    it "should add a adage" do
+    it "should add an adage" do
       controller.add("Give a dog a bone.")
       assert_equal 1, Adage.count
     end
 
-    it "should not add a adage that is all spaces" do
+    it "should not add an adage that is all spaces" do
       adage_content = "      "
       result = controller.add(adage_content)
-      assert_equal "\"\" is not a real adage.", result
+      assert_equal "Content can't be blank.", result
     end
 
     it "should only add adages that makes sense" do

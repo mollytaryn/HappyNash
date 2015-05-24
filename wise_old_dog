@@ -9,7 +9,7 @@ menu_prompt = <<EOS
 EOS
 
 if ARGV.empty?
-  user_input = ask("I may be an old dog, but I am wise beyond my years. Ask me anything. I am ready to impart my wisdom.\n")
+  user_input = ask("I may be an old dog, but I am wise beyond my years. Ask me anything. I am ready to impart my wisdom unto you.\n")
   AdagesController.new().advice
 elsif ARGV.size == 1 and ARGV[0] == "manage"
   loop do
